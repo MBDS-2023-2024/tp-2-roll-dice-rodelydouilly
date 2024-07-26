@@ -3,6 +3,7 @@ package com.example.diceroller
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -41,9 +42,15 @@ class MainActivity : AppCompatActivity() {
         val resultTextView2: TextView = findViewById(R.id.textView2)
         resultTextView2.text = diceRoll2.toString()
 
+        // Get the target number
+        val targetNumberEditText: EditText = findViewById(R.id.targetNumber)
+        val targetNumber = targetNumberEditText.text.toString().toIntOrNull()
+
         // Check if the user wins
-        if (diceRoll1 == diceRoll2) {
+        if (targetNumber != null && (diceRoll1 + diceRoll2) == targetNumber) {
             Toast.makeText(this, "Félicitations ! Vous avez gagné !", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Désolé, vous avez perdu. Essayez encore !", Toast.LENGTH_SHORT).show()
         }
     }
 }
